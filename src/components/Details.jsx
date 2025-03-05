@@ -5,24 +5,28 @@ import { useContext, useEffect, useState } from "react";
 import instance from "../utils/api";
 import Loading from "./Loading";
 function Details() {
+  const [products, setproducts] = useContext(contextProduct);
   const [product, setproduct] = useState(null);
-  const [products] = useContext(contextProduct);
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log(id);
 
-  const getsingledata = async () => {
+  /*const getsingledata = async () => {
     try {
       const { data } = await instance.get(`/products/${id}`);
       setproduct(data);
     } catch (error) {
       console.log(error);
     }
-  };
+  };*/
 
   useEffect(() => {
-    getsingledata();
+    if (!product) {
+      setproduct(products.filter((p) => p.id == id)[0]);
+    }
+    //getsingledata();
   }, []);
+
+  console.log(product);
   return product ? (
     <>
       <div className="relative w-full h-screen">

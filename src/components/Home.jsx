@@ -22,14 +22,14 @@ function Home() {
   };
 
   useEffect(() => {
-    if (!filteredproduct) setfilteredproduct(products);
+    if (!filteredproduct || category == "undefined")
+      setfilteredproduct(products);
     if (category != "undefined") getproductcategory();
-    console.log(filteredproduct);
   }, [category, products]);
   return products ? (
     <>
       <Nav />
-      <div className="w-[85%]  p-10 flex flex-wrap overflow-x-hidden overflow-y-auto  ">
+      <div className="w-[85%]  p-10 flex flex-wrap overflow-x-hidden overflow-y-auto mt-8  ">
         {filteredproduct &&
           filteredproduct.map((item, index) => (
             <Link

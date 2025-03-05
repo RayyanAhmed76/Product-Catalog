@@ -3,9 +3,11 @@ import instance from "./api";
 
 export const contextProduct = createContext();
 function Context(props) {
-  const [products, setproducts] = useState(null);
+  const [products, setproducts] = useState(
+    JSON.parse(localStorage.getItem("products")) || null
+  );
 
-  const getproducts = async () => {
+  /* const getproducts = async () => {
     try {
       const { data } = await instance.get(`/products`);
       setproducts(data);
@@ -16,7 +18,7 @@ function Context(props) {
 
   useEffect(() => {
     getproducts();
-  }, []);
+  }, []);*/
 
   return (
     <contextProduct.Provider value={[products, setproducts]}>
