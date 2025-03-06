@@ -10,6 +10,13 @@ function Details() {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  const deletedatahandler = (id) => {
+    const filtereddata = products.filter((p) => p.id !== id);
+    setproducts(filtereddata);
+    localStorage.setItem("products", JSON.stringify(filtereddata));
+    navigate("/");
+  };
+
   /*const getsingledata = async () => {
     try {
       const { data } = await instance.get(`/products/${id}`);
@@ -20,6 +27,7 @@ function Details() {
   };*/
 
   useEffect(() => {
+    console.log("this is id: " + id, products.id);
     if (!product) {
       setproduct(products.filter((p) => p.id == id)[0]);
     }
@@ -43,8 +51,18 @@ function Details() {
             <h2 className="text-lg opacity-50  mt-6">{product.category}</h2>
             <h2 className="mt-4 text-red-400">$ {product.price}</h2>
             <p className="mt-5 mb-5">{product.description}</p>
-            <Link className="px-6 py-1 text-red-300 border mr-5">Edit</Link>
-            <Link className="px-6 py-1 text-blue-300 border">Delete</Link>
+            <Link
+              to={`/edit/${product.id}`}
+              className="px-6 py-1 text-red-300 border mr-5"
+            >
+              Edit
+            </Link>
+            <button
+              onClick={() => deletedatahandler(product.id)}
+              className="px-6 py-1 text-blue-300 border"
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>
