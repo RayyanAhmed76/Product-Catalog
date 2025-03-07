@@ -11,14 +11,14 @@ function App() {
   console.log(search.length);
 
   return (
-    <div className="w-full h-screen  flex">
+    <div className="w-full h-screen flex relative">
       {((pathname !== "/" && !pathname.startsWith(`/details/`)) ||
         search.length > 0) && (
         <Link
           to="/"
-          className="text-black  w-[30px] h-[30px]  absolute left-[18%] top-[3%]"
+          className="absolute top-4 left-4 md:top-8  md:left-5   p-2   rounded-full"
         >
-          <IoMdHome className="border rounded-full w-[30px] h-[30px] " />
+          <IoMdHome className="w-8 h-8 text-black md:w-10 md:h-10 " />
         </Link>
       )}
 

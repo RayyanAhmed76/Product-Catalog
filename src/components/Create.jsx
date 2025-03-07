@@ -34,7 +34,7 @@ function Create() {
     };
     setproducts([...products, product]);
     localStorage.setItem("products", JSON.stringify([...products, product]));
-    toast.success("Added Product successfully");
+    toast.success("Product added successfully");
     navigate("/");
   };
 

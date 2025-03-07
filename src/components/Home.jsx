@@ -14,8 +14,15 @@ function Home() {
 
   const getproductcategory = async () => {
     try {
-      const { data } = await instance.get(`/products/category/${category}`);
-      setfilteredproduct(data);
+      const storedProducts = JSON.parse(localStorage.getItem("products")) || [];
+
+      // Filter products by category
+      const filteredProducts = storedProducts.filter(
+        (p) => p.category === category
+      );
+
+      // Update state with filtered products
+      setfilteredproduct(filteredProducts);
     } catch (error) {
       console.log(error);
     }
@@ -29,17 +36,17 @@ function Home() {
   return products ? (
     <>
       <Nav />
-      <div className="w-[85%]  p-10 flex flex-wrap overflow-x-hidden overflow-y-auto mt-8  ">
+      <div className="w-[85%] p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 overflow-x-hidden overflow-y-auto mt-8 ">
         {filteredproduct &&
           filteredproduct.map((item, index) => (
             <Link
               key={index}
               to={`/details/${item.id}`}
-              className="card w-[19%] h-[32vh] flex flex-col  justify-center items-center border border-black/10 rounded-lg p-2 shadow-sm mb-4 mr-2 "
+              className="card flex flex-col items-center border border-black/10 rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow "
             >
-              <div className="object-cover w-[80%] h-[35vh] mb-1 hover:scale-110 flex justify-center">
+              <div className="w-full flex justify-center">
                 <img
-                  className="w-[90%] h-[150px] lg:h-[250px]"
+                  className="w-full max-w-[200px] h-[150px] object-contain mb-4"
                   src={item.image}
                 />
               </div>
